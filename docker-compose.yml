@@ -1,0 +1,40 @@
+version: "2"
+
+services:
+  tellerbot-api:
+    build:
+      context: ./tellerbot-api
+      dockerfile: Dockerfile
+    ports:
+      - "8181:8181"
+    volumes:
+      - ./tellerbot-api:/app
+    command: php artisan serve --host=0.0.0.0 --port=8181
+    networks:
+      - tellerbot-net
+  memcached:
+    image: memcached:1.4.21
+    ports:
+      - "11211:11211"
+    networks:
+      - tellerbot-net
+  api-data:
+    image: mysql:5.7.29
+    ports:
+      - "3306:3306"
+    networks:
+      - tellerbot-net
+    volumes:
+      - ./api-data/data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=sample
+      - MYSQL_DATABASE=api-data
+  redis:
+    image: redis:3.2.8-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - tellerbot-net
+networks: 
+  tellerbot-net:
+    driver: bridge

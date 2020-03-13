@@ -1,0 +1,7 @@
+api-data/
+.idea/*
+.vscode/*
+.vs
+*.code-workspace
+*.log
+
