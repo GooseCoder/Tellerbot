@@ -46,6 +46,19 @@ class IntentManager
         }
     }
 
+    public function getDialog($intent) {
+        $dialogs = [
+            "login" => "Please use the form to log in.",
+            "signup" => "Please use the form to sign up.",
+            "help" => "A small guidance here.",
+            "withdraw" => "You can withdraw using the card, please check you have sufficient funds.",
+            "deposit" => "You can deposit on various currencies, conversion rates are applied automatically.",
+            "extract" => "Here is your account balance.",
+            "exchange" => "You can check exchange rates using this card.",
+        ];
+        return $dialogs[$intent];
+    }
+
     /**
      * @param $message
      * @return array

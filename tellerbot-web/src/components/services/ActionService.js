@@ -6,6 +6,7 @@ import makeDeposit from './actions/makeDeposit';
 import makeWithdraw from './actions/makeWithdraw';
 import makeExchange from './actions/makeExchange';
 import getExtract from './actions/getExtract';
+import sendMessage from './actions/sendMessage';
 
 export default class ActionService {
     processAction(action, data, state, setState) {
@@ -14,6 +15,8 @@ export default class ActionService {
                 return closeCard(data, state, setState);
             case 'openCard':
                 return openCard(data, state, setState);
+            case 'sendMessage':
+                return sendMessage(data, state, setState);
             case 'loginUser':
                 return loginUser(data, state, setState);
             case 'signupUser':

@@ -33,7 +33,9 @@ function Card({ id, title, dispatcher, type, data }) {
             );
             break;
         case 'help':
-            typedCard = <HelpCard id={id} />;
+            typedCard = (
+                <HelpCard id={id} dispatcher={dispatcher} data={data} />
+            );
             break;
         case 'withdraw':
             typedCard = (
@@ -66,7 +68,7 @@ function Card({ id, title, dispatcher, type, data }) {
     if (data.errors) {
         let errorList = [];
         for (let i in data.errors) {
-            errorList.push(<ol key={i}>{data.errors[i]}</ol>);
+            errorList.push(<li key={i}>{data.errors[i]}</li>);
         }
         errors = (
             <div className="notification is-danger">
@@ -76,7 +78,7 @@ function Card({ id, title, dispatcher, type, data }) {
     }
 
     return (
-        <Reveal effect="animated fadeInUp">
+        <Reveal effect="animated fadeInDown">
             <div className="card">
                 {errors}
                 <header className="card-header">

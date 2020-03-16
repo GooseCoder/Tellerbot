@@ -1,6 +1,5 @@
 export default class CardService {
     getCard(data) {
-        console.log('gettincard', data);
         switch (data.intent) {
             case 'login':
                 return {
@@ -68,6 +67,18 @@ export default class CardService {
                     content: {
                         title: 'Withdraw from account',
                         type: 'withdraw',
+                        data: data
+                    },
+                    id: Math.random()
+                        .toString(36)
+                        .substring(7)
+                };
+            case 'help':
+                return {
+                    type: 'card',
+                    content: {
+                        title: 'How to use this bot',
+                        type: 'help',
                         data: data
                     },
                     id: Math.random()

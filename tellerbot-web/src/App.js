@@ -33,79 +33,11 @@ function App() {
         actionService.processAction(action, data, chatState, setChatState);
     };
 
-    const saveMessage = message => {
-        const newDate = new Date();
-        chatService.sendMessage(message.content).then(res => {
-            const newMessage = {
-                ...message,
-                publishDate: newDate.toDateString()
-            };
-            if (res.data.success) {
-                if (
-                    cardService.authorizedCard(
-                        res.data,
-                        chatState.configuration
-                    )
-                ) {
-                    if (res.data.intent === 'extract') {
-                        res.data.state = chatState;
-                    }
-
-                    if (
-                        res.data.intent === 'deposit' ||
-                        res.data.intent === 'withdraw'
-                    ) {
-                        res.data.accountId =
-                            chatState.loggedUser.accounts[0].id;
-                        res.data.currencyCode =
-                            chatState.loggedUser.accounts[0].currency_code;
-                    }
-
-                    const card = {
-                        ...cardService.getCard(res.data),
-                        publishDate: newDate.toDateString()
-                    };
-                    setChatState({
-                        ...chatState,
-                        messages: [
-                            ...chatState.messages,
-                            newMessage,
-                            botService.defaultResponse(),
-                            card
-                        ]
-                    });
-                } else {
-                    setChatState({
-                        ...chatState,
-                        messages: [
-                            ...chatState.messages,
-                            newMessage,
-                            botService.custom(
-                                'Please Log into your account first'
-                            )
-                        ]
-                    });
-                }
-            } else {
-                setChatState({
-                    ...chatState,
-                    messages: [...chatState.messages, newMessage]
-                });
-            }
-
-            document
-                .getElementById('chatbox')
-                .scrollTo(0, document.getElementById('chatbox').scrollHeight);
-            console.log(chatState);
-        });
-    };
-
     return (
         <div className="has-navbar-fixed-top">
             <TopBar loggedUser={chatState.loggedUser} />
             <Chat
                 messages={chatState.messages}
-                saveMessage={saveMessage}
                 loggedUser={chatState.loggedUser}
                 dispatcher={dispatcher}
             />

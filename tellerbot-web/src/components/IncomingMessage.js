@@ -6,7 +6,7 @@ import UserPicture from './UserPicture';
 
 function IncomingMessage({ content, publishDate, user }) {
     return (
-        <Reveal effect="animated fadeInUp">
+        <Reveal effect="animated fadeInDown">
             <div className="media">
                 <div className="media-left has-text-centered">
                     <UserPicture size="3x" user={user} icon="robot" />

@@ -8,9 +8,6 @@ export default function signupUser(data, state, setState) {
         .toString(36)
         .substring(7);
     data.accounts[0].type = 'savings';
-    console.log('data', data);
-    //    delete data.account;
-    //  console.log('data2', data);
 
     return axios
         .post(

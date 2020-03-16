@@ -45,7 +45,7 @@ class PassportController extends Controller
                 'currency_code' => $request->accounts[0]['currency_code']
             ])->transactions()->create([
                 'amount' => $request->accounts[0]['amount'],
-                'type' => 'ADD',
+                'type' => 'DEPOSIT',
                 'code' => $request->accounts[0]['code'],
                 'currency_code' => $request->accounts[0]['currency_code'],
                 'exchanged_currency_code' => $request->accounts[0]['currency_code'],

@@ -1,10 +1,10 @@
 export default class BotService {
     greet() {
-        return this.custom('Hello, How can I help you?');
+        return this.custom("I'm Tellerbot, How can I be of service");
     }
 
     defaultResponse() {
-        return this.custom('Sure, let me see what can I do. :)');
+        return this.custom('Let me see what can I do. :)');
     }
 
     custom(content) {

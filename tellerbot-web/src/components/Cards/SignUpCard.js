@@ -7,6 +7,47 @@ function SignUpCard({ id, dispatcher }) {
     const [accountCurrencyCode, setAccountCurrencyCode] = useState('USD');
     const [accountAmount, setAccountAmount] = useState('');
 
+    const codes = [
+        'CAD',
+        'HKD',
+        'ISK',
+        'PHP',
+        'DKK',
+        'HUF',
+        'CZK',
+        'GBP',
+        'RON',
+        'SEK',
+        'IDR',
+        'INR',
+        'BRL',
+        'RUB',
+        'HRK',
+        'JPY',
+        'THB',
+        'CHF',
+        'EUR',
+        'MYR',
+        'BGN',
+        'TRY',
+        'CNY',
+        'NOK',
+        'NZD',
+        'ZAR',
+        'USD',
+        'MXN',
+        'SGD',
+        'AUD',
+        'ILS',
+        'KRW',
+        'PLN'
+    ];
+    const options = codes.map((code, id) => (
+        <option key={id} value={code}>
+            {code}
+        </option>
+    ));
+
     return (
         <div>
             <div className="field">
@@ -56,11 +97,7 @@ function SignUpCard({ id, dispatcher }) {
                                 setAccountCurrencyCode(e.target.value)
                             }
                         >
-                            <select>
-                                <option>USD</option>
-                                <option>LBR</option>
-                                <option>EUR</option>
-                            </select>
+                            <select>{options}</select>
                         </span>
                     </p>
                     <p className="control is-expanded">

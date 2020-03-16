@@ -20,19 +20,47 @@ export default function loginUser(data, state, setState) {
             }
         )
         .then(res => {
-            const botService = new BotService();
-            return setState({
-                configuration: {
-                    ...state.configuration,
-                    access_token: res.data.access_token
-                },
-                loggedUser: res.data.user,
-                messages: [
-                    ...state.messages.filter(message => {
-                        return data.id !== message.id;
-                    }),
-                    botService.custom('Congrats, you have been logged in. ;)')
-                ]
-            });
+            console.log('401???');
+            if (res.data.success) {
+                const botService = new BotService();
+                return setState({
+                    configuration: {
+                        ...state.configuration,
+                        access_token: res.data.access_token
+                    },
+                    loggedUser: res.data.user,
+                    messages: [
+                        ...state.messages.filter(message => {
+                            return data.id !== message.id;
+                        }),
+                        botService.custom(
+                            'Congrats, you have been logged in. ;)'
+                        )
+                    ]
+                });
+            }
+        })
+        .catch(error => {
+            if (error.response) {
+                const message = state.messages.find(
+                    message => message.id === data.id
+                );
+
+                return setState({
+                    ...state,
+                    messages: [
+                        ...state.messages.filter(message => {
+                            return data.id !== message.id;
+                        }),
+                        {
+                            ...message,
+                            content: {
+                                ...message.content,
+                                data: { errors: error.response.data.errors }
+                            }
+                        }
+                    ]
+                });
+            }
         });
 }

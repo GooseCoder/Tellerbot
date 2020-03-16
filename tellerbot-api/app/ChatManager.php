@@ -15,10 +15,12 @@ class ChatManager
 
     public function processMessage($message)
     {
-        $result = $this->intentManager->getIntent($message);
+        $intent = $this->intentManager->getIntent($message);
+        $dialog = $this->intentManager->getDialog($intent);
         return [
-            "success" => ($result ? true : false),
-            "intent" => $result
+            "success" => ($intent ? true : false),
+            "intent" => $intent,
+            "dialog" => $dialog
         ];
     }
 }

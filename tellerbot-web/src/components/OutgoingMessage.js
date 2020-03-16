@@ -6,7 +6,7 @@ import 'animate.css/animate.css';
 
 function OutgoingMessage({ content, publishDate, user }) {
     return (
-        <Reveal effect="animated fadeInUp">
+        <Reveal effect="animated fadeInDown">
             <div className="media">
                 <div className="media-content">
                     <div className="content box is-size-5">{content}</div>
