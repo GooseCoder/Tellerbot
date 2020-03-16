@@ -3,13 +3,16 @@ import getExtract from '../services/actions/getExtract';
 
 function ExtractCard({ id, data, dispatcher }) {
     const [transactions, setTransactions] = useState([]);
+    const [account, setAccount] = useState(data.state.loggedUser.accounts[0]);
 
     useEffect(() => {
         getExtract(data.state).then(res => {
             if (res.data.success) {
                 setTransactions(res.data.account.transactions);
+                setAccount(res.data.account);
             } else {
                 setTransactions([]);
+                setAccount(data.state.loggedUser.accounts[0]);
             }
         });
     }, []);
@@ -43,12 +46,8 @@ function ExtractCard({ id, data, dispatcher }) {
     return (
         <div>
             <div>
-                Account: {data.state.loggedUser.accounts[0].id}-
-                {data.state.loggedUser.accounts[0].type}, TOTAL:{' '}
-                {parseFloat(data.state.loggedUser.accounts[0].amount).toFixed(
-                    2
-                )}{' '}
-                {data.state.loggedUser.accounts[0].currency_code}
+                Account: {account.id}-{account.type}, TOTAL:
+                {parseFloat(account.amount).toFixed(2)} {account.currency_code}
             </div>
             {transactionList}
         </div>
