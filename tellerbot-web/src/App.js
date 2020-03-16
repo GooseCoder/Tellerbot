@@ -1,76 +1,45 @@
 import React, { useState } from 'react';
 
+import './iconLibrary';
 import './App.css';
-import TopBar from './TopBar';
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-    faSearch,
-    faFemale,
-    faMale,
-    faHeart,
-    faUser,
-    faQuestion,
-    faTruck,
-    faCreditCard,
-    faArrowRight,
-    faEllipsisV,
-    faStar,
-    faStarHalfAlt,
-    faPlus,
-    faRobot,
-    faPaperPlane
-} from '@fortawesome/free-solid-svg-icons';
-
-import {
-    faStar as farStar,
-    faHeart as farHeart
-} from '@fortawesome/free-regular-svg-icons';
-import Chat from './Chat';
-
-library.add(
-    faSearch,
-    faFemale,
-    faMale,
-    faHeart,
-    farHeart,
-    faUser,
-    faQuestion,
-    faTruck,
-    faCreditCard,
-    faArrowRight,
-    faEllipsisV,
-    faStar,
-    farStar,
-    faStarHalfAlt,
-    faPlus,
-    faRobot,
-    faPaperPlane
-);
+import TopBar from './components/TopBar';
+import Chat from './components/Chat';
+import ConfigurationService from './components/services/ConfigurationService';
+import ActionService from './components/services/ActionService';
+import CardService from './components/services/CardService';
+import BotService from './components/services/BotService';
+import ChatService from './components/services/ChatService';
+import getExtract from './components/services/actions/getExtract';
 
 function App() {
-    const [loggedUser, setLoggedUser] = useState({
-        id: '00001',
-        type: 'guest',
-        username: 'Guest'
-    });
-    const [messages, setMessages] = useState([]);
+    const loadedConfiguration = new ConfigurationService();
+    const chatService = new ChatService();
+    const cardService = new CardService();
+    const botService = new BotService();
 
-    const saveMessage = message => {
-        const newDate = new Date();
-        setMessages([
-            ...messages,
-            { ...message, publishDate: newDate.toDateString() }
-        ]);
+    const [chatState, setChatState] = useState({
+        loggedUser: {
+            id: '00001',
+            type: 'guest',
+            username: 'Guest'
+        },
+        configuration: loadedConfiguration.getClientCredentials(),
+        messages: [botService.greet()]
+    });
+
+    const dispatcher = (action, data) => {
+        const actionService = new ActionService();
+        actionService.processAction(action, data, chatState, setChatState);
     };
 
     return (
-        <div className="App">
-            <TopBar loggedUser={loggedUser} />
+        <div className="has-navbar-fixed-top">
+            <TopBar loggedUser={chatState.loggedUser} />
             <Chat
-                messages={messages}
-                saveMessage={saveMessage}
-                loggedUser={loggedUser}
+                messages={chatState.messages}
+                loggedUser={chatState.loggedUser}
+                dispatcher={dispatcher}
             />
         </div>
     );
