@@ -18,7 +18,7 @@ This project was created using:
 Or the easy way, this is the recommended way to install Tellerbot:
 * Clone this repository:
     
-    `git clone`
+    `git clone git@github.com:GooseCoder/tellerbot.git`
 
 ### 2.a. Setup Environment (Docker)
 
