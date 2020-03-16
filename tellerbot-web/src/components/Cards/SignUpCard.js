@@ -90,14 +90,15 @@ function SignUpCard({ id, dispatcher }) {
                 <label className="label">Account - Initial deposit.</label>
                 <div className="field has-addons">
                     <p className="control">
-                        <span
-                            className="select"
-                            value={accountCurrencyCode}
-                            onChange={e =>
-                                setAccountCurrencyCode(e.target.value)
-                            }
-                        >
-                            <select>{options}</select>
+                        <span className="select">
+                            <select
+                                value={accountCurrencyCode}
+                                onChange={e =>
+                                    setAccountCurrencyCode(e.target.value)
+                                }
+                            >
+                                {options}
+                            </select>
                         </span>
                     </p>
                     <p className="control is-expanded">
