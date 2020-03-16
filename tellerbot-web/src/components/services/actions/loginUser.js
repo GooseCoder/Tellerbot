@@ -20,7 +20,6 @@ export default function loginUser(data, state, setState) {
             }
         )
         .then(res => {
-            console.log('401???');
             if (res.data.success) {
                 const botService = new BotService();
                 return setState({
