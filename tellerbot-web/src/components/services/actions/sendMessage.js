@@ -26,12 +26,7 @@ export default function sendMessage(data, state, setState) {
 
     chatService.sendMessage(data.content).then(res => {
         if (res.data.success) {
-            if (
-                cardService.authorizedCard(
-                    res.data.intent,
-                    newState.configuration
-                )
-            ) {
+            if (cardService.authorizedCard(res.data, newState.configuration)) {
                 if (res.data.intent === 'extract') {
                     res.data.state = newState;
                 }
