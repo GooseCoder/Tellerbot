@@ -8,10 +8,7 @@ RUN pecl install -o -f redis \
     &&  docker-php-ext-enable redis
 
 COPY . /app
-
-VOLUME [ "/app" ]
 WORKDIR /app
-
 RUN composer install
 
 CMD php artisan serve --host=0.0.0.0 --port=8181
