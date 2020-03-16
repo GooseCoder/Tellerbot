@@ -7,15 +7,10 @@ import TopBar from './components/TopBar';
 import Chat from './components/Chat';
 import ConfigurationService from './components/services/ConfigurationService';
 import ActionService from './components/services/ActionService';
-import CardService from './components/services/CardService';
 import BotService from './components/services/BotService';
-import ChatService from './components/services/ChatService';
-import getExtract from './components/services/actions/getExtract';
 
 function App() {
     const loadedConfiguration = new ConfigurationService();
-    const chatService = new ChatService();
-    const cardService = new CardService();
     const botService = new BotService();
 
     const [chatState, setChatState] = useState({
