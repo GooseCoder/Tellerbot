@@ -33,6 +33,7 @@ The previous step created the application environment but to run the project we 
 1. `docker exec -it tellerbot_tellerbot-api_1 bash `
 2. `php artisan migrate`
 3. `php artisan db:seed`
+4. `php artisan passport:install`
 
 One recommendation is to check that the first command starts a bash session inside the container, if not, neither of the following commands will execute the data setup
 
@@ -49,8 +50,9 @@ Then configure the laravel api application from the tellerbot-api folder:
 2. Create a database named: api-data
 3. Modify the .env file to modify the DB_HOST variable to point to the right database host, usually `localhost`
 4. Run `php artisan migrate` to setup the required tables.
-4. Run `php artisan db:seed` to seed the database with the initial data
-6. Run `php artisan serve --host=0.0.0.0 --port=8181` to serve the api
+5. Run `php artisan db:seed` to seed the database with the initial data
+6. RUN `php artisan passport:install` to install passport.
+7. Run `php artisan serve --host=0.0.0.0 --port=8181` to serve the api
 
 To configure the react ui from the tellerbot-web folder:
 1. Edit the file `src/components/services/ConfigurationService.js` to change the api host address if required
