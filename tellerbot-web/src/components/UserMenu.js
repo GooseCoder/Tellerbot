@@ -3,7 +3,7 @@ import UserPicture from './UserPicture';
 
 function UserMenu({ user }) {
     const { type, username } = user;
-    const { displayUsername } = type === 'guest' ? '' : username;
+    const displayUsername = type === 'guest' ? '' : username;
     return (
         <span className="media ">
             <div className="media-left">

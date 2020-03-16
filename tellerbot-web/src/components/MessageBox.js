@@ -4,8 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function MessageBox({ content, placeholder, sendHandler }) {
     const [inputValue, setInputValue] = useState(content);
     const localHandler = () => {
-        sendHandler(inputValue);
-        setInputValue('');
+        if (inputValue) {
+            sendHandler(inputValue);
+            setInputValue('');
+        }
     };
     return (
         <span className="container">
@@ -21,7 +23,10 @@ function MessageBox({ content, placeholder, sendHandler }) {
                 </div>
                 <div className="control">
                     <button className="button is-text" onClick={localHandler}>
-                        <FontAwesomeIcon icon="paper-plane" size="2x" />
+                        <FontAwesomeIcon
+                            icon="arrow-alt-circle-right"
+                            size="2x"
+                        />
                     </button>
                 </div>
             </div>
